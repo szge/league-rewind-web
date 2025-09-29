@@ -1,12 +1,11 @@
 
-import './App.css'
 import Hero from './Hero'
 
 function App() {
   return (
-    <div className="scroll-container min-h-screen">
+    <div className="main">
       <Hero />
-      <div className="h-[200vh] bg-gray-900 flex items-center justify-center">
+      <div className="h-[300vh] bg-gray-900 flex items-center justify-center">
         <h2 className="text-white text-4xl">Next Section</h2>
       </div>
     </div>
