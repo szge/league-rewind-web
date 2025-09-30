@@ -12,6 +12,7 @@ Design and assets:
 - https://store.steampowered.com/replay/76561198092387302/2024
     - stats highlight cards, achievements/gamesplayed/streak compared to median, interactive charts, playtime + achievements + screenshots by game, timeline of games played
     - web-first interactive design. instantly generates any year.
+- https://www.riotgames.com/en/legal
 
 ## Design
 - consider web-first design for the hackathon project since I assume most people will be on web
@@ -25,7 +26,14 @@ Design and assets:
 - https://nasaprospect.com/
 - LoL minimap UI with stats per lane as you hover over them
 - ARAM stats
+- community dragon assets: https://raw.communitydragon.org/15.19/plugins/rcp-fe-lol-static-assets/global/default/images/
 
+TODO:
+- possibly move assets (images, fonts) to AWS storage
+- make background simply just that community dragon image
+- hero knockout/cutout
+- parallax ekko and jinx (and accompanying sounds) should appear as you initially scroll thru the hero page
+- rewind effects overlay
 
 
 ## page design
@@ -37,4 +45,38 @@ Design and assets:
     - clicking will pause the animations and zoom into the rewind
     - mute button on page
 2. Enter Riot ID as input -> waiting screen while data is loading
-3. 
+    - some fun loading animation if it is more than 1s
+3. Timeline of gameplay throughout the year
+    - https://mui.com/material-ui/react-timeline/
+    - events like: first time playing X champ, Y champ is released, Worlds
+    - key statistics and achievements - reached 10k kills, etc. maybe Challenges API?
+        - is it possible to get M/GM/C Challenges and date of achievement?
+    - define as img, date, description
+4. Generate your profile picture
+    - prompt for a photo input or take one. it will put your face on ur most-played champ
+    - maybe you can select another champ if you don't like that one
+    - use nano banana or some image generation model (this is the "AI" part)
+5. Kadeem vs. you vs. Faker stats comparison
+    - rows will animate one at a time, showing KDA, positions played
+6. You now vs. before
+    - maybe first 100 vs. last 100, or first 6 months vs. last 6 months if not enough games
+    - playstyle, roles, etc
+7. End screen - stats card
+    - pick from different stats card images to share with friends
+    - contrast from background colour; maybe pink?
+    - inspo: FIFA, Pokemon https://www.behance.net/gallery/196954477/Valorant-Clove-Act-II-Agent-Launch?tracking_source=search_projects|RIOT+GAMES&l=7
+    - include watermark for site
+
+X. More ideas
+    - games per month; or some other fun way to display games played, like the GitHub contributions chart
+
+question: how should AI be integrated into the app?
+    - image generation
+    - LLMs are good at generating natural language insights
+        - compare player stats card before and after
+
+
+
+## inspiration
+https://eiger-extreme.mammut.com/
+- one part of the image in front of the text

@@ -7,7 +7,7 @@
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  background-color: #010A13;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -17,4 +17,11 @@
 
 #root {
   width: 100%;
+}
+
+@font-face {
+  font-family: 'BeaufortForLoL Heavy';
+  src: url('./assets/BeaufortForLoL-OTF/BeaufortforLOL-Heavy.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
 }
