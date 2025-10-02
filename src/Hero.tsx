@@ -1,12 +1,13 @@
 import { useRef } from "react";
 import { motion, useScroll, useTransform, useMotionValueEvent } from "motion/react";
 import video from "./assets/ekkotest1.mp4";
-import tickSound from "./assets/ticking.mp3";
+import crashSound from "./assets/crash.mp3";
 
 export default function Hero() {
   const wrapperRef = useRef<HTMLDivElement | null>(null);
   const videoRef = useRef<HTMLVideoElement | null>(null);
-  const audioRef = useRef<HTMLAudioElement | null>(null);
+  const crashAudioRef = useRef<HTMLAudioElement | null>(null);
+  const crashTriggered = useRef(false);
 
   const { scrollYProgress } = useScroll({
     target: wrapperRef,
@@ -31,7 +32,7 @@ export default function Hero() {
     [0, 0, 1, 1]
   );
 
-  
+
   useMotionValueEvent(videoProgress, "change", (latest) => {
     const video = videoRef.current;
     if (video && video.duration) {
@@ -44,16 +45,9 @@ export default function Hero() {
   });
 
   useMotionValueEvent(scrollYProgress, "change", (latest) => {
-    if (audioRef.current) {
-      if (latest < 0.7) {
-        if (audioRef.current.paused) {
-          audioRef.current.play();
-        }
-      } else {
-        if (!audioRef.current.paused) {
-          audioRef.current.pause();
-        }
-      }
+    if (!crashTriggered.current && crashAudioRef.current && latest > 0.7) {
+      crashTriggered.current = true;
+      crashAudioRef.current.play();
     }
   });
 
@@ -66,7 +60,6 @@ export default function Hero() {
         }}
         className="fixed inset-0 w-full h-screen flex items-center justify-center overflow-hidden pointer-events-none z-50"
       >
-        {/* Video Background */}
         <video
           ref={videoRef}
           src={video}
@@ -75,7 +68,7 @@ export default function Hero() {
           playsInline
           preload="auto"
         />
-        
+
         {/* Overlay gradient for better text readability */}
         {/* <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/30" /> */}
 
@@ -96,8 +89,7 @@ export default function Hero() {
           </h1>
         </motion.div>
       </motion.div>
-      {/* Hidden audio element for ticking sound */}
-      <audio autoPlay ref={audioRef} src={tickSound} loop preload="auto" style={{ display: 'none' }} />
+      <audio ref={crashAudioRef} src={crashSound} preload="auto" style={{ display: 'none' }} />
     </>
   );
 }

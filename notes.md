@@ -40,13 +40,11 @@ https://youtu.be/w7z-HZ32FnI
 
 ## page design
 1. "REWIND" text; maybe LoL client blue background with magic
-    - "rewind" disruptive visual effect
     - soundscape: tape reverse sound effect; maybe with splices of Arcane soundtrack and other LoL sounds
         - https://freesound.org/people/cribbler/sounds/511454/ cut into beginning and looping middle section
     - EKKO ULT??? EKKO SOUND EFFECTS???? YO?? EKKO WATCH TICKING?
-    - clicking will pause the animations and zoom into the rewind
     - mute button on page
-    - depth: 
+    - depth: some particles flying out when ekko smashes the title
 2. Enter Riot ID as input -> waiting screen while data is loading
     - some fun loading animation if it is more than 1s
 3. Timeline of gameplay throughout the year
