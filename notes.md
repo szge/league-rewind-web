@@ -34,6 +34,8 @@ TODO:
 - hero knockout/cutout
 - parallax ekko and jinx (and accompanying sounds) should appear as you initially scroll thru the hero page
 - rewind effects overlay
+- find a solution with motion or react that allows the video to scroll smoothly
+https://youtu.be/w7z-HZ32FnI
 
 
 ## page design
@@ -44,6 +46,7 @@ TODO:
     - EKKO ULT??? EKKO SOUND EFFECTS???? YO?? EKKO WATCH TICKING?
     - clicking will pause the animations and zoom into the rewind
     - mute button on page
+    - depth: 
 2. Enter Riot ID as input -> waiting screen while data is loading
     - some fun loading animation if it is more than 1s
 3. Timeline of gameplay throughout the year
@@ -66,6 +69,7 @@ TODO:
     - contrast from background colour; maybe pink?
     - inspo: FIFA, Pokemon https://www.behance.net/gallery/196954477/Valorant-Clove-Act-II-Agent-Launch?tracking_source=search_projects|RIOT+GAMES&l=7
     - include watermark for site
+    - maybe some fun particles for flair
 
 X. More ideas
     - games per month; or some other fun way to display games played, like the GitHub contributions chart
@@ -75,8 +79,8 @@ question: how should AI be integrated into the app?
     - LLMs are good at generating natural language insights
         - compare player stats card before and after
 
-
-
-## inspiration
+## Design inspiration
+https://www.awwwards.com/websites/sites_of_the_year/
+https://www.behance.net/search/projects/valorant%20paris?tracking_source=typeahead_search_direct
 https://eiger-extreme.mammut.com/
 - one part of the image in front of the text

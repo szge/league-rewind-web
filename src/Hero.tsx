@@ -1,8 +1,12 @@
 import { useRef } from "react";
-import { motion, useScroll, useTransform } from "motion/react";
+import { motion, useScroll, useTransform, useMotionValueEvent } from "motion/react";
+import video from "./assets/ekkotest1.mp4";
+import tickSound from "./assets/ticking.mp3";
 
 export default function Hero() {
-  const wrapperRef = useRef(null);
+  const wrapperRef = useRef<HTMLDivElement | null>(null);
+  const videoRef = useRef<HTMLVideoElement | null>(null);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
 
   const { scrollYProgress } = useScroll({
     target: wrapperRef,
@@ -21,36 +25,79 @@ export default function Hero() {
     [1, 1, 0]
   );
 
+  const videoProgress = useTransform(
+    scrollYProgress,
+    [0, 0.2, 0.7, 1],
+    [0, 0, 1, 1]
+  );
+
+  
+  useMotionValueEvent(videoProgress, "change", (latest) => {
+    const video = videoRef.current;
+    if (video && video.duration) {
+      const time = latest * video.duration;
+      // Use requestAnimationFrame for smoother updates
+      requestAnimationFrame(() => {
+        video.currentTime = time;
+      });
+    }
+  });
+
+  useMotionValueEvent(scrollYProgress, "change", (latest) => {
+    if (audioRef.current) {
+      if (latest < 0.7) {
+        if (audioRef.current.paused) {
+          audioRef.current.play();
+        }
+      } else {
+        if (!audioRef.current.paused) {
+          audioRef.current.pause();
+        }
+      }
+    }
+  });
+
   return (
     <>
-      <div ref={wrapperRef} className="h-[300vh]" />
+      <div ref={wrapperRef} className="h-[150vh]" />
       <motion.div
         style={{
           opacity,
-          backgroundImage: "url('https://raw.communitydragon.org/15.19/plugins/rcp-fe-lol-static-assets/global/default/magic-bg.jpg')",
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundRepeat: 'no-repeat',
         }}
         className="fixed inset-0 w-full h-screen flex items-center justify-center overflow-hidden pointer-events-none z-50"
       >
+        {/* Video Background */}
+        <video
+          ref={videoRef}
+          src={video}
+          className="absolute inset-0 w-full h-full object-cover"
+          muted
+          playsInline
+          preload="auto"
+        />
+        
+        {/* Overlay gradient for better text readability */}
+        {/* <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/30" /> */}
+
         <motion.div
           style={{ scale: zoom }}
-          className="relative w-full px-4"
+          className="relative w-full px-4 z-10"
         >
           <h1
             className="font-black select-none text-[23vw] leading-none text-center whitespace-nowrap text-transparent bg-clip-text bg-white"
             style={{
-                fontFamily: "'BeaufortForLoL Heavy', system-ui, Avenir, Helvetica, Arial, sans-serif",
-                fontWeight: 900,
-                // WebkitTextStroke: '2px white',
-                color: '#C79B3B',
+              fontFamily: "'BeaufortForLoL Heavy', system-ui, Avenir, Helvetica, Arial, sans-serif",
+              fontWeight: 900,
+              color: '#C79B3B',
+              textShadow: '0 0 40px rgba(0,0,0,0.5)',
             }}
           >
             REWIND
           </h1>
         </motion.div>
       </motion.div>
+      {/* Hidden audio element for ticking sound */}
+      <audio autoPlay ref={audioRef} src={tickSound} loop preload="auto" style={{ display: 'none' }} />
     </>
   );
 }
